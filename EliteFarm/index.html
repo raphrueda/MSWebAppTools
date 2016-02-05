@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html ng-app="EliteApp">
+    <head>
+        <title>Windia Elite Tracker</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+        <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+    </head>
+    <body style="padding-top:50px">
+        <div class="main" ng-controller="EliteController">
+            <div class="container">    
+                <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="#">ELITEFARM</a>
+                        </div>
+                    </div>                    
+                </nav>
+
+                <div class="page-header">
+                    <h1>Windia Elite Tracker <small>Bonus Potential Stamp Farming Simulator 2015</small></h1>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Instructions</h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul>
+                                    <li>Click <span class="glyphicon glyphicon-plus"></span> whenever a dark mob dies on your channel </li>
+                                    <li>Click <span class="glyphicon glyphicon-alert"></span> when your channel turns dark (will reset kill count)</li>
+                                    <li>Click <span class="label label-danger">MIA</span> when boss spawns and then <span class="label label-success">LIVE</span> when killed</li>
+                                </ul>
+                                <hr>
+                                <ul>
+                                    <li>Red: 0 - 9 kills and Grim</li>
+                                    <li>Yellow: 10+ kills and Grim</li>
+                                    <li>Blue: 0+ kills and Dark</li>
+                                    <li>Green: Boss is live</li>
+                                </ul>                            
+                            </div>
+                        </div>                    
+                    </div>
+                    <div class="col-md-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">About</h3>
+                            </div>
+                            <div class="panel-body">
+                                Current Version: V1.0 <br>
+                                <ul>
+                                    <li>Initial Build</li>                                    
+                                </ul>
+                                <hr>
+                                SyntaxError is currently recruiting in Windia. <br>
+                                Whisper Kyokoco, Syllenia or KimYura for info.                              
+                            </div>
+                        </div>                     
+                    </div>
+                </div>
+
+                
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading"><h1 class="panel-title">Warrior Grounds</h1></div>
+                    <div class="row">
+                        <div class="col-md-6">                       
+                            <!-- Table -->
+                            <div class="table-responsive">
+                                <table class="table" style="table-layout:fixed">
+                                    <thead>
+                                        <tr>
+                                            <td class="table-hd">Ch</td>
+                                            <td class="table-hd">Kill Count</td>
+                                            <td class="table-hd">Status</td>
+                                           <!-- <td class="table-hd">Last Killed</td> -->
+                                            <td class="table-hd">Boss</td>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="channel in left">
+                                        <td class="{{channel.color}}">{{$index + 1}}</td>
+                                        <td class="{{channel.color}}">{{channel.kills}} <span class="glyphicon glyphicon-plus fade" ng-click="updateKillCount($index + 1)"></span></td>
+                                        <td class="{{channel.color}}">{{channel.status}} <span class="glyphicon glyphicon-alert fade" ng-click="updateDark($index + 1)"></span></td>
+                                    <!--    <td class="{{channel.color}}">{{channel.death}}</td> -->
+                                        <td class="{{channel.color}}"><button type="button" class="btn btn-xs {{channel.bossColor}}" ng-click="updateBoss($index + 1)">{{channel.boss}}</button></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Table -->
+                            <div class="table-responsive">
+                                <table class="table" style="table-layout:fixed">
+                                    <thead>
+                                        <tr>
+                                            <td class="table-hd">Ch</td>
+                                            <td class="table-hd">Kill Count</td>
+                                            <td class="table-hd">Status</td>
+                                            <!-- <td class="table-hd">Last Killed</td> -->
+                                            <td class="table-hd">Boss</td>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="channel in right">
+                                        <td class="{{channel.color}}">{{$index + 11}}</td>
+                                        <td class="{{channel.color}}">{{channel.kills}} <span class="glyphicon glyphicon-plus fade" ng-click="updateKillCount($index + 11)"></span></td>
+                                        <td class="{{channel.color}}">{{channel.status}} <span class="glyphicon glyphicon-alert fade" ng-click="updateDark($index + 11)"></span></td>
+                                        <!--    <td class="{{channel.color}}">{{channel.death}}</td> -->
+                                        <td class="{{channel.color}}"><button type="button" class="btn btn-xs {{channel.bossColor}}" ng-click="updateBoss($index + 11)">{{channel.boss}}</button></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>                    
+                    </div>  
+                </div>                
+            </div>
+        </div>
+                       
+        
+        <!-- Modules -->
+        <script src="js/app.js"></script>    
+        
+        <!-- Controllers -->
+        <script src="js/EliteController.js"></script>
+        
+    </body>
+</html>
+
